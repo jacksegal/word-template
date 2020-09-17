@@ -35,7 +35,7 @@ Route::any('/pdf', function (Request $request) {
 	$options->setIsRemoteEnabled(true);
 	$dompdf->setOptions($options);
 
-	return view('postcard', compact('firstname', 'age', 'school', 'message'))->render();
+	//return view('postcard', compact('firstname', 'age', 'school', 'message'))->render();
 
 	$html = view('postcard', compact('firstname', 'age', 'school', 'message'))->render();
 	$dompdf->loadHtml($html);
