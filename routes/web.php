@@ -43,7 +43,6 @@ Route::any('/pdf', function (Request $request) {
 	$dompdf->setPaper('A4', 'landscape');
 	$dompdf->render();
 	$dompdf->stream();
-
 });
 
 Route::get('/ecard', function (Request $request) {
