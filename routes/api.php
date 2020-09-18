@@ -47,7 +47,7 @@ Route::any('/pdf', function (Request $request) {
 
     try {
 
-        $filename = 'cop26-ecard-'. $key . 'pdf';
+        $filename = 'cop26-ecard-'. $key . '.pdf';
         $filePath = 'digital-activist/'.$filename;
 
         $response = Storage::disk('spaces')->put($filePath, $content, 'public');
