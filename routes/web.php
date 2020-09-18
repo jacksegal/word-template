@@ -21,44 +21,6 @@ Route::get('/', function () {
 });
 
 
-Route::any('/pdf', function (Request $request) {
-	
-	// $design = $request->query('design');
-	$key = $request->input('key');
-	$firstname = $request->input('firstname');
-	$age = $request->input('age');
-	$school = $request->input('school');
-	$message = $request->input('message');
-
-	$dompdf = new Dompdf();
-
-	$options = $dompdf->getOptions();
-	$options->setIsRemoteEnabled(true);
-	$dompdf->setOptions($options);
-
-	//return view('postcard', compact('firstname', 'age', 'school', 'message'))->render();
-
-	$html = view('postcard', compact('firstname', 'age', 'school', 'message'))->render();
-	$dompdf->loadHtml($html);
-	
-	$dompdf->setPaper('A4', 'landscape');
-	$dompdf->render();
-	// $dompdf->stream();
-	$content = $dompdf->output();
-
-    try {
-
-        $filename = 'cop26-ecard-'. $key . 'pdf';
-        $filePath = 'digital-activist/'.$filename;
-
-        $response = Storage::disk('spaces')->put($filePath, $content, 'public');
-        return response()->json(['src'=> Storage::cloud()->url($filePath)]);
-
-    } catch (Exception $e) {
-        return response()->json(['error' => $e->getMessage()], 500);
-    }	
-});
-
 Route::get('/ecard', function (Request $request) {
 
 	$design = $request->query('design');
