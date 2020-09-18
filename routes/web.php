@@ -24,6 +24,7 @@ Route::get('/', function () {
 Route::any('/pdf', function (Request $request) {
 	
 	// $design = $request->query('design');
+	$key = $request->input('key');
 	$firstname = $request->input('firstname');
 	$age = $request->input('age');
 	$school = $request->input('school');
@@ -42,7 +43,20 @@ Route::any('/pdf', function (Request $request) {
 	
 	$dompdf->setPaper('A4', 'landscape');
 	$dompdf->render();
-	$dompdf->stream();
+	// $dompdf->stream();
+	$content = $dompdf->output();
+
+    try {
+
+        $filename = 'cop26-ecard-'. $key . 'pdf';
+        $filePath = 'digital-activist/'.$filename;
+
+        $response = Storage::disk('spaces')->put($filePath, $content, 'public');
+        return response()->json(['src'=> Storage::cloud()->url($filePath)]);
+
+    } catch (Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }	
 });
 
 Route::get('/ecard', function (Request $request) {
