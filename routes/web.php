@@ -21,32 +21,32 @@ Route::get('/', function () {
 });
 
 
-Route::get('/ecard', function (Request $request) {
+// Route::get('/ecard', function (Request $request) {
 
-	$design = $request->query('design');
-	$firstname = $request->query('firstname');
-	$age = $request->query('age');
-	$school = $request->query('school');
-	$message = $request->query('message');
+// 	$design = $request->query('design');
+// 	$firstname = $request->query('firstname');
+// 	$age = $request->query('age');
+// 	$school = $request->query('school');
+// 	$message = $request->query('message');
 
-		// Creating the new document...
-	$templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('app/Unicef-Epost-Word-Codes-1.docx'));
+// 		// Creating the new document...
+// 	$templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('app/Unicef-Epost-Word-Codes-1.docx'));
 
-	$templateProcessor->setValue('firstname', $firstname);
-	$templateProcessor->setValue('age', $age);
-	$templateProcessor->setValue('school', $school);
+// 	$templateProcessor->setValue('firstname', $firstname);
+// 	$templateProcessor->setValue('age', $age);
+// 	$templateProcessor->setValue('school', $school);
 
-	$templateProcessor->setValue('message', $message);
+// 	$templateProcessor->setValue('message', $message);
 
-	$templateProcessor->setImageValue('design', array('path' => storage_path('app/ecard-1.png'), 'width' => '5cm', 'height' => '3cm', 'ratio' => false));
+// 	$templateProcessor->setImageValue('design', array('path' => storage_path('app/ecard-1.png'), 'width' => '5cm', 'height' => '3cm', 'ratio' => false));
 
-	$templateProcessor->saveAs(public_path('storage/'. time() . '.docx'));
+// 	$templateProcessor->saveAs(public_path('storage/'. time() . '.docx'));
 
-	return response()->json([
-		'design' => $design,
-		'firstname' => $firstname,
-		'age' => $age,
-		'school' => $school,
-		'message' => $message,
-	]);
-});
+// 	return response()->json([
+// 		'design' => $design,
+// 		'firstname' => $firstname,
+// 		'age' => $age,
+// 		'school' => $school,
+// 		'message' => $message,
+// 	]);
+// });

@@ -18,7 +18,7 @@
 
         <h1 style="margin-bottom: 50px;">UUK E-card Builder</h1>
 
-        <form action="/pdf" method="POST">
+        <form action="/api/form-pdf" method="POST" style="margin-bottom: 100px;">
           @csrf()
           <div class="form-group">
             <label for="firstname">First name</label>
@@ -40,6 +40,15 @@
             <textarea maxlength="300" class="form-control" id="message" name="message" rows="3">I'm baby jianbing pour-over +1 hexagon, flannel pitchfork cred letterpress slow-carb mixtape cloud bread. Shabby chic leggings yuccie, beard tote bag bitters blog copper mug poke.
 
 I'm baby jianbing pour-over +1 hexagon, flannel pitchfork cred letterpress slow-carb mixtape cloud bread.</textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="design">Design</label>
+            <select class="form-control" name="design" id="design">
+              <option value="https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/375/design-1.jpg">design-1.jpg</option>
+              <option value="https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/375/design-2.jpg">design-2.jpg</option>
+              <option value="https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/375/design-3.jpg">design-3.jpg</option>
+            </select>
           </div>
           
           <button type="submit" class="btn btn-primary">Submit</button>

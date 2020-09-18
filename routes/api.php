@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::any('/pdf', function (Request $request) {
+Route::any('/form-pdf', function (Request $request) {
 	
 	// $design = $request->query('design');
 	$key = $request->input('key');
@@ -28,6 +28,7 @@ Route::any('/pdf', function (Request $request) {
 	$age = $request->input('age');
 	$school = $request->input('school');
 	$message = $request->input('message');
+	$design = $request->input('design', 'https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/375/design-1.jpg');
 
 	$dompdf = new Dompdf();
 
@@ -37,7 +38,33 @@ Route::any('/pdf', function (Request $request) {
 
 	//return view('postcard', compact('firstname', 'age', 'school', 'message'))->render();
 
-	$html = view('postcard', compact('firstname', 'age', 'school', 'message'))->render();
+	$html = view('postcard', compact('firstname', 'age', 'school', 'message', 'design'))->render();
+	$dompdf->loadHtml($html);
+	
+	$dompdf->setPaper('A4', 'landscape');
+	$dompdf->render();
+	$dompdf->stream();
+});
+
+Route::any('/pdf', function (Request $request) {
+	
+	// $design = $request->query('design');
+	$key = $request->input('key');
+	$firstname = $request->input('firstname');
+	$age = $request->input('age');
+	$school = $request->input('school');
+	$message = $request->input('message');
+	$design = $request->input('design', 'https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/375/design-1.jpg');
+
+	$dompdf = new Dompdf();
+
+	$options = $dompdf->getOptions();
+	$options->setIsRemoteEnabled(true);
+	$dompdf->setOptions($options);
+
+	//return view('postcard', compact('firstname', 'age', 'school', 'message'))->render();
+
+	$html = view('postcard', compact('firstname', 'age', 'school', 'message', 'design'))->render();
 	$dompdf->loadHtml($html);
 	
 	$dompdf->setPaper('A4', 'landscape');

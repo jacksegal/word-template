@@ -32,6 +32,10 @@
 		font-family: 'Kalam', cursive;
 	}
 
+	.heavy-cond {
+		font-family: 'UniversNextPro-HeavyCond',sans-serif;
+	}
+
 	.details {
 		margin: 0;
 		border-bottom: solid 1px #999999;
@@ -66,7 +70,7 @@
 				
 				<td class="left-col">
 					<div style="width: 390px;">
-						<img src="https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/375/design-2.jpg" width="390">
+						<img src="{{$design}}" width="390">
 					</div>
 
 					<div style="margin-top: 10px;">
