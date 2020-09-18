@@ -48,7 +48,7 @@ Route::any('/pdf', function (Request $request) {
     try {
 
         $filename = 'cop26-ecard-'. $key . '.pdf';
-        $filePath = 'digital-activist/'.$filename;
+        $filePath = 'uuk-ecard/'.$filename;
 
         $response = Storage::disk('spaces')->put($filePath, $content, 'public');
         return response()->json(['src'=> Storage::cloud()->url($filePath)]);
