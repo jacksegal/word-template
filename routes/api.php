@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::any('/form-pdf', function (Request $request) {
-	
+
 	// $design = $request->query('design');
 	$key = $request->input('key');
 	$firstname = $request->input('firstname');
@@ -40,14 +40,14 @@ Route::any('/form-pdf', function (Request $request) {
 
 	$html = view('postcard', compact('firstname', 'age', 'school', 'message', 'design'))->render();
 	$dompdf->loadHtml($html);
-	
+
 	$dompdf->setPaper('A4', 'landscape');
 	$dompdf->render();
 	$dompdf->stream();
 });
 
 Route::any('/pdf', function (Request $request) {
-	
+
 	// $design = $request->query('design');
 	$key = $request->input('key');
 	$firstname = $request->input('firstname');
@@ -66,21 +66,19 @@ Route::any('/pdf', function (Request $request) {
 
 	$html = view('postcard', compact('firstname', 'age', 'school', 'message', 'design'))->render();
 	$dompdf->loadHtml($html);
-	
+
 	$dompdf->setPaper('A4', 'landscape');
 	$dompdf->render();
 	// $dompdf->stream();
 	$content = $dompdf->output();
 
     try {
-
         $filename = 'cop26-ecard-'. $key . '.pdf';
         $filePath = 'uuk-ecard/'.$filename;
-
         $response = Storage::disk('spaces')->put($filePath, $content, 'public');
         return response()->json(['src'=> Storage::cloud()->url($filePath)]);
 
     } catch (Exception $e) {
         return response()->json(['error' => $e->getMessage()], 500);
-    }	
+    }
 });

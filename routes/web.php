@@ -20,6 +20,15 @@ Route::get('/', function () {
     return view('form');
 });
 
+Route::get('/clicksend/front', function () {
+    return view('clicksend.front');
+});
+
+Route::get('/clicksend/back', function () {
+    return view('clicksend.back');
+});
+
+
 
 // Route::get('/ecard', function (Request $request) {
 

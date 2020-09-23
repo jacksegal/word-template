@@ -25,18 +25,23 @@ Artisan::command('inspire', function () {
 Artisan::command('pdf', function () {
 
 	$dompdf = new Dompdf();
-	$dompdf->loadHtml('<h1>hello world</h1>');
-	$dompdf->setPaper('A5', 'landscape');
 
+	$options = $dompdf->getOptions();
+    $options->setIsRemoteEnabled(true);
+    $dompdf->setOptions($options);
+
+    $html = view('clicksend.back')->render();
+    $dompdf->loadHtml($html);
+    $dompdf->setPaper('A5', 'landscape');
+    $dompdf->render();
 	$output = $dompdf->output();
-	file_put_contents(storage_path('app/pdf/test.pdf'), $output);
-	// Storage::put('pdf/'.time(). '_dompdf.pdf', $output);
+	Storage::put('pdf/'.time(). '_dompdf.pdf', $output);
 
 })->purpose('Display an inspiring quote');
 
 
 Artisan::command('word', function () {
-    
+
 	// Creating the new document...
 	$templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('app/Unicef-Epost-Word-Codes-1.docx'));
 
@@ -57,14 +62,14 @@ Artisan::command('word', function () {
 
 	$temp = \PhpOffice\PhpWord\IOFactory::load(storage_path('app/'. $filename));
 	$xmlWriter = \PhpOffice\PhpWord\IOFactory::createWriter($temp , 'PDF');
-	$xmlWriter->save(storage_path('app/'. time() .'_converted.pdf'), TRUE);	
+	$xmlWriter->save(storage_path('app/'. time() .'_converted.pdf'), TRUE);
 	//Load export library
 	// $domPdfPath = base_path( 'vendor/dompdf/dompdf');
 	// \PhpOffice\PhpWord\Settings::setPdfRendererPath($domPdfPath);
 	// \PhpOffice\PhpWord\Settings::setPdfRendererName('DomPDF');
-	
+
 	// //load generated file
-	// $phpWord = \PhpOffice\PhpWord\IOFactory::load(storage_path('app/'. $filename)); 
+	// $phpWord = \PhpOffice\PhpWord\IOFactory::load(storage_path('app/'. $filename));
 	// //generate the pdf converter class
 	// $xmlWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord , 'PDF');
 	// //save generated File

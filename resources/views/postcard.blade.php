@@ -118,7 +118,7 @@
 				</td>
 				<td class="right-col">
 					<div style="width: 390px; margin-top: 20px;">
-						<img src="https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/375/outright-logo-cyan.png" width="390">
+						<img src="https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/375/UUK_WIDE_FECright_blue_rgb.png" width="390">
 					</div>					
 				</td>
 			</tr>
